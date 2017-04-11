@@ -13,7 +13,7 @@
 	position: relative;
 }
 
-#previous, #next {
+#previous, #next, #play {
 	height: 200px;
 	background-color: none;
 	border: none;
@@ -22,18 +22,35 @@
 	top: 0;
 	font-size: 40px;
 	font-weight: 100;
-	opacity: .5;
+	opacity: .4;
+	text-align: center;
 }
 
-#previous:focus, #next:focus {
+#previous:focus, 
+#next:focus, 
+#play:focus {
 	outline: 0;
 }
 
 #previous {
 	left: 0;
+	width: 8%;
 }
 
 #next {
 	right: 0;
+	width: 8%;
+}
+
+#previous:hover, 
+#next:hover,
+#play:hover {
+	opacity: .6;
+}
+
+#play {
+	width: 84%;
+	left: 8%;
+	opacity: 0;
 }
 
