@@ -1,5 +1,6 @@
 var canClick = true;
-var play ;
+var play;
+var canPlay = true;
 
 function showNext(){
 	if (canClick) {
@@ -16,12 +17,19 @@ function showNext(){
 }
 
 $("#play").click(function(){
-	play = setInterval(showNext, 1000);
+	if(canPlay == true){
+		play = setInterval(showNext, 1000);
+		canPlay = false;
+		$("#pauseOrPlay").removeClass("fa-play");
+		$("#pauseOrPlay").addClass("fa-pause");
+	}else{
+		clearInterval(play);
+		canPlay= true;
+		$("#pauseOrPlay").removeClass("fa-pause");
+		$("#pauseOrPlay").addClass("fa-play");
+	}
 });
 
-$("#pause").click(function(){
-	clearInterval(play);
-});
 
 $("#next").click(showNext);
 
