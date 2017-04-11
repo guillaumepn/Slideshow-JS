@@ -2,24 +2,25 @@
 	text-align: center;
 }
 
-#rail {
-	width: 1600px;
+#rail img {
+	max-width: 800px;
+	object-fit: cover;
 }
 
 #slideshow {
-	width: 400px;
+	width: 800px;
 	overflow: hidden;
 	margin: 0 auto;
 	position: relative;
 }
 
 #previous, #next, #play {
-	height: 200px;
 	background-color: none;
 	border: none;
 	cursor: pointer;
 	position: absolute;
 	top: 0;
+	bottom: 0;
 	font-size: 40px;
 	font-weight: 100;
 	opacity: .4;
@@ -51,8 +52,8 @@
 #play {
 	width: 20%;
 	background: transparent;
-	line-height: 200px;
 	left: 40%;
+	line-height: 500px;
 	opacity: 0;
 	border-radius: 50%;
 }
