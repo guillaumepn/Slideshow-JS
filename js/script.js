@@ -2,6 +2,11 @@ var canClick = true;
 var play;
 var canPlay = true;
 
+var json = '[{"url":"https:\/\/static.pexels.com\/photos\/292600\/pexels-photo-292600.jpeg","title":"La montagne","desc":"Elle est belle ma montagne"},{"url":"https:\/\/static.pexels.com\/photos\/192505\/pexels-photo-192505.jpeg","title":"La route","desc":"Elle est belle ma route"},{"url":"https:\/\/static.pexels.com\/photos\/66258\/staniel-cay-swimming-pig-seagull-fish-66258.jpeg","title":"La plage","desc":"Elle est belle ma page"}]'
+
+json = json.replace("\\/", "/");
+
+
 function showNext(){
 	if (canClick) {
 		canClick = false;
