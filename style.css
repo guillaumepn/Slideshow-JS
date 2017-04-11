@@ -49,8 +49,11 @@
 }
 
 #play {
-	width: 84%;
-	left: 8%;
+	width: 20%;
+	background: transparent;
+	line-height: 200px;
+	left: 40%;
 	opacity: 0;
+	border-radius: 50%;
 }
 
