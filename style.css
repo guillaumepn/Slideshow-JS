@@ -15,7 +15,7 @@
 }
 
 #previous, #next, #play {
-	background-color: none;
+	background-color: #fff;
 	border: none;
 	cursor: pointer;
 	position: absolute;
@@ -47,6 +47,7 @@
 #next:hover,
 #play:hover {
 	opacity: .6;
+	transition-duration: .2s;
 }
 
 #play {

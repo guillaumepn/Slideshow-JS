@@ -1,13 +1,13 @@
 var canClick = true;
 var play;
 var canPlay = true;
+var watchHover = false;
 
 $.getJSON("https://www.skrzypczyk.fr/slideshow.php", function (data) {
 	var nbImages = 0;
 	$.each(data, function(key, value) {
 		$("#rail").append("<img src=\""+ value["url"] +"\" desc=\""+ value["desc"] +"\" alt=\""+ value["title"] +"\">");
 		nbImages++;
-		//console.log($("img:eq(1)").css("height"));
 	});
 	
 	$("#rail").css("width", nbImages*800);
@@ -37,7 +37,8 @@ $("#play").click(function(){
 		$("#pauseOrPlay").addClass("fa-pause");
 	}else{
 		clearInterval(play);
-		canPlay= true;
+		canPlay = true;
+		watchHover = false;
 		$("#pauseOrPlay").removeClass("fa-pause");
 		$("#pauseOrPlay").addClass("fa-play");
 	}
@@ -57,5 +58,19 @@ $("#previous").click(function() {
 		}, "slow", function() {
 			canClick = true;
 		});
+	}
+});
+
+$("#slideshow").hover(function() {	// Mouse enters
+	if (!canPlay && watchHover) {
+		clearInterval(play);
+		console.log("in : " + play);
+	}
+}, function() {						// Mouse leaves
+	if (!canPlay && watchHover) {
+		play = setInterval(showNext, 2000);
+		console.log("out : " + play);
+	} else if (!canPlay && !watchHover) {
+		watchHover = true;
 	}
 });
