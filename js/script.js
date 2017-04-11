@@ -36,7 +36,7 @@ $("#play").click(function(){
 });
 
 
-$("#next").click( showNext);
+$("#next").click(showNext);
 
 $("#previous").click(function() {
 	if (canClick) {
