@@ -8,7 +8,8 @@ $(document).ready(function() {
 	$.getJSON("https://www.skrzypczyk.fr/slideshow.php", function (data) {
 		var nbImages = 0;
 		$.each(data, function(key, value) {
-			$("#rail").append("<img src=\""+ value["url"] +"\" data-desc=\""+ value["desc"] +"\" data-title=\""+ value["title"] +"\">");
+			$("#rail").append("<img src=\""+ value["url"] +"\" data-nb=\""+ nbImages + "\" data-desc=\""+ value["desc"] +"\" data-title=\""+ value["title"] +"\">");
+			$(".navigator").append("<i class='fa fa-circle-o' data-nbnav='" + nbImages + "' aria-hidden='true'></i>");
 			nbImages++;
 		});
 		
@@ -19,6 +20,12 @@ $(document).ready(function() {
 	});
 
 	function showNext(){
+		$('.navigator').css({
+				color: "transparent"
+			});
+		$('.info').css({
+				textShadow: "0 0 #fff"
+			});
 		if (canClick) {
 			removeTitle();
 			canClick = false;
@@ -35,42 +42,45 @@ $(document).ready(function() {
 	}
 
 	function displayTitle() {
+		$("[data-nbnav]").each(function(){
+			if ($(this).attr("data-nbnav") == $("#rail img:first").attr("data-nb")){
+				$(this).removeClass("fa-circle-o");
+				$(this).addClass("fa-circle");
+			}else{
+				$(this).removeClass("fa-circle");
+				$(this).addClass("fa-circle-o");
+			}
+		});
 		$('.title').text($("#rail img:first").attr("data-title"));
-		$('.title').animate({
+		$('.desc').text($("#rail img:first").attr("data-desc"));
+		
+		$('.info').animate({
 			marginTop: "-=150"
 		}, "fast", function() {
-			$('.title').css({
+			$('.info').css({
 				textShadow: "3px 2px rgba(0,0,0,0.5)"
 			});
-		});
-		$('.desc').text($("#rail img:first").attr("data-desc"));
-		$('.desc').animate({
-			marginTop: "+=20"
-		}, "slow", function() {
-			$('.desc').css({
-				textShadow: "3px 2px rgba(0,0,0,0.5)"
+			$('.navigator').css({
+				color: "#eee"
 			});
 		});
 	}
 
 	function removeTitle() {
 		$('.title').text($("#rail img:first").attr("data-title"));
-		$('.title').css({
+		$('.desc').text($("#rail img:first").attr("data-desc"));
+		$('.info').css({
 				textShadow: "0 0 #fff"
 			});
-		$('.title').animate({
+		$('.info').animate({
 			marginTop: "+=150"
 		}, "fast", function() {
-			
-		});
-		$('.desc').text($("#rail img:first").attr("data-desc"));
-		$('.desc').css({
+			$('.info').css({
 				textShadow: "0 0 #fff"
 			});
-		$('.desc').animate({
-			marginTop: "-=20"
-		}, "slow", function() {
-
+			$('.navigator').css({
+				color: "transparent"
+			});
 		});
 	}
 
@@ -92,6 +102,12 @@ $(document).ready(function() {
 	$("#next").click(showNext);
 
 	$("#previous").click(function() {
+		$('.navigator').css({
+				color: "transparent"
+			});
+		$('.info').css({
+				textShadow: "0 0 #fff"
+			});
 		if (canClick) {
 			removeTitle();
 			canClick = false;
@@ -119,6 +135,11 @@ $(document).ready(function() {
 		} else if (!canPlay && !watchHover) {
 			watchHover = true;
 		}
+	});
+
+	$('body').on('click', '[data-nbnav]', function() {
+		var bullet = $(this);
+		console.log(bullet.attr('data-nbnav'));
 	});
 
 });

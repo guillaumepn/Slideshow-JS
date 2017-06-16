@@ -7,10 +7,9 @@
 }
 
 #rail img {
-	max-width: 800px;
+	width: 800px;
+	height: 530px;
 	object-fit: cover;
-	height: auto;
-	vertical-align: top;
 }
 
 #slideshow {
@@ -85,3 +84,18 @@
 	font-weight: 100;
 }
 
+.navigator{
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 12px;
+}
+
+.navigator i{
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.navigator i:last-child{
+	margin-right: 0px;
+}
