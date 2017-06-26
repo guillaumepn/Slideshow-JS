@@ -116,16 +116,16 @@ $(document).ready(function() {
 		console.log(diff);
 		var cpt = 0;
 		if (diff > 0) {
+			removeTitle();
 			$("#rail").animate({
 				marginLeft: "-="+(diff*800)
-			}, "fast", function() {
+			}, "slow", function() {
 				while (cpt < diff) {
 					$("#rail img:last-child").after(first);
 					first = $("img:first");
 					$(this).css("margin-left", "+=800px");
 					cpt++;
 				}
-				removeTitle();
 				displayTitle();
 			});
 		} else if (diff < 0) {
