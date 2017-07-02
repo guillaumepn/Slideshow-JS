@@ -5,6 +5,7 @@ $(document).ready(function() {
 	var canPlay = true;
 	var watchHover = false;
 
+	/* Récupère les images : */
 	$.getJSON("https://www.skrzypczyk.fr/slideshow.php", function (data) {
 		var nbImages = 0;
 		$.each(data, function(key, value) {
@@ -19,6 +20,7 @@ $(document).ready(function() {
 
 	});
 
+	/* Slide jusqu'à l'image suivante : */
 	function showNext(){
 		var first = $("img:first");		
 		$('.navigator').css({
@@ -42,7 +44,9 @@ $(document).ready(function() {
 		return first.attr('data-nb');
 	}
 
+	/* Slide jusqu'à l'image précédente : */
 	function showPrev() {
+		var first = $("img:first");	
 		$('.navigator').css({
 				color: "transparent"
 			});
@@ -65,6 +69,7 @@ $(document).ready(function() {
 		return first.attr('data-nb');
 	}
 
+	/* Afficher titre et description : */
 	function displayTitle() {
 		$("[data-nbnav]").each(function(){
 			if ($(this).attr("data-nbnav") == $("#rail img:first").attr("data-nb")){
@@ -90,6 +95,7 @@ $(document).ready(function() {
 		});
 	}
 
+	/* Faire disparaître titre et description : */
 	function removeTitle() {
 		$('.title').text($("#rail img:first").attr("data-title"));
 		$('.desc').text($("#rail img:first").attr("data-desc"));
@@ -108,13 +114,14 @@ $(document).ready(function() {
 		});
 	}
 
+	/* Navigue vers la "bullet" cliquée : */
 	function goTo(bullet) {
 		var img = $("[data-nb="+bullet+"]");
 		var first = $("img:first");
 		var last = $("img:last");
 		var diff = img.attr('data-nb') - first.attr('data-nb');
-		console.log(diff);
 		var cpt = 0;
+
 		if (diff > 0) {
 			removeTitle();
 			$("#rail").animate({
@@ -127,6 +134,7 @@ $(document).ready(function() {
 					cpt++;
 				}
 				displayTitle();
+				canClick = true;
 			});
 		} else if (diff < 0) {
 			diff = diff * (-1);
@@ -141,14 +149,12 @@ $(document).ready(function() {
 				marginLeft: "+="+(diff*800)
 			}, "slow", function() {
 				displayTitle();
+				canClick = true;
 			});
 		}
-		console.log("diff:"+diff);
-		console.log(img);
-		console.log(img.attr('data-nb'));
-
 	}
 
+	/* Switch entre Play / Pause (pour animation auto) : */
 	$("#play").click(function(){
 		if(canPlay == true){
 			play = setInterval(showNext, 2000);
@@ -168,7 +174,8 @@ $(document).ready(function() {
 
 	$("#previous").click(showPrev);
 
-	$("#slideshow").hover(function() {	// Mouse enters
+	/* Met en pause l'animation auto au survol de la souris : */
+	$("#slideshow, .info, .navigator").hover(function() {	// Mouse enters
 		if (!canPlay && watchHover) {
 			clearInterval(play);
 		}
@@ -180,27 +187,11 @@ $(document).ready(function() {
 		}
 	});
 
+	/* Clic sur les "bullets" : */
 	$('body').on('click', '[data-nbnav]', function() {
 		var bullet = $(this);
+		canClick = false;
 		goTo(bullet.attr('data-nbnav'));
-		/*if (bullet.attr('data-nbnav') > first.attr('data-nb')) {	
-			//nextImg = showNext();
-			repeatNext = setInterval(function() {
-				nextImg = showNext();
-				if (bullet.attr('data-nbnav') == (nextImg)) {
-					clearInterval(repeatNext);
-				}
-				//console.log("bullet: "+bullet.attr('data-nbnav')+" ; nextimg: "+nextImg);
-			}, 1000);
-		} else if (bullet.attr('data-nbnav') < first.attr('data-nb')) {
-			var repeatPrev = setInterval(function() {
-				prevImg = showPrev();
-				if (bullet.attr('data-nbnav') == prevImg)
-					clearInterval(repeatPrev);
-			}, 1000);
-		}
-		console.log("bullet : "+bullet.attr('data-nbnav'));*/
-		
 	});
 
 });
