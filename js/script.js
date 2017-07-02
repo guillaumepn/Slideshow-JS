@@ -24,7 +24,7 @@ $(document).ready(function() {
 	function showNext(){
 		var first = $("img:first");		
 		$('.navigator').css({
-				color: "transparent"
+				display: "none"
 			});
 		$('.info').css({
 				textShadow: "0 0 #fff"
@@ -48,7 +48,7 @@ $(document).ready(function() {
 	function showPrev() {
 		var first = $("img:first");	
 		$('.navigator').css({
-				color: "transparent"
+				display: "none"
 			});
 		$('.info').css({
 				textShadow: "0 0 #fff"
@@ -90,7 +90,7 @@ $(document).ready(function() {
 				textShadow: "3px 2px rgba(0,0,0,0.5)"
 			});
 			$('.navigator').css({
-				color: "#eee"
+				display: "block"
 			});
 		});
 	}
@@ -109,7 +109,7 @@ $(document).ready(function() {
 				textShadow: "0 0 #fff"
 			});
 			$('.navigator').css({
-				color: "transparent"
+				display: "none"
 			});
 		});
 	}
@@ -193,5 +193,7 @@ $(document).ready(function() {
 		canClick = false;
 		goTo(bullet.attr('data-nbnav'));
 	});
+
+	$('.debug').html(window.screen.width + " " + window.screen.height);
 
 });

@@ -76,7 +76,6 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 34px;
     font-weight: 900;
-    /*text-shadow: 3px 2px rgba(0,0,0,0.5);*/
 }
 
 .desc {
@@ -84,18 +83,61 @@
 	font-weight: 100;
 }
 
-.navigator{
+.navigator {
 	position: relative;
 	text-align: center;
 	margin: 0 auto;
 	font-size: 12px;
+	color: #eee;
+	top: 20px;
 }
 
-.navigator i{
+.navigator i {
 	margin-right: 10px;
 	cursor: pointer;
+	font-size: 16px;
+	text-shadow: 0px 1px 10px rgb(50,50,50);
 }
 
-.navigator i:last-child{
+.navigator i:hover {
+	text-shadow: 0px 1px 10px rgb(25,25,25);
+}
+
+.navigator i:last-child {
 	margin-right: 0px;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-device-width: 800px) {
+
+	.navigator {
+		top: 100px;
+	}
+
+	.navigator i {
+		font-size: 60px;
+		margin: 0 25px;
+	}
+
+	.title, .desc {
+		font-size: 26px;
+	}
+
+}
+@media screen and (max-width: 800px) {
+
+	.navigator {
+		top: 100px;
+	}
+
+	.navigator i {
+		font-size: 60px;
+		margin: 0 25px;
+	}
+
+	.title, .desc {
+		font-size: 26px;
+	}
+
 }
