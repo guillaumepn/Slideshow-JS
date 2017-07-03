@@ -170,9 +170,17 @@ $(document).ready(function() {
 		}
 	});
 
+	/* Left / right : */
 	$("#next").click(showNext);
 
 	$("#previous").click(showPrev);
+
+	$('html').keydown(function(e) {
+		if (e.which == 37)
+			showPrev();
+		if (e.which == 39) 
+			showNext();
+	});
 
 	/* Met en pause l'animation auto au survol de la souris : */
 	$("#slideshow, .info, .navigator").hover(function() {	// Mouse enters
