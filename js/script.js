@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+	/* Paramètres modifiables : */
+	var speed = 800;
+	var duration = 2000;
+
+	/* Initialisation des variables : */
 	var canClick = true;
 	var play;
 	var canPlay = true;
@@ -34,7 +39,7 @@ $(document).ready(function() {
 			canClick = false;
 			$("#rail").animate({
 				marginLeft: "-=800"
-			}, "slow", function() {
+			}, speed, function() {
 				$("#rail img:last-child").after(first);
 				$(this).css("margin-left", "+=800px");
 				canClick = true;
@@ -61,7 +66,7 @@ $(document).ready(function() {
 			$("#rail").css("margin-left", "-=800px");
 			$("#rail").animate({
 				marginLeft: "+=800"
-			}, "slow", function() {
+			}, speed, function() {
 				canClick = true;
 				displayTitle();
 			});
@@ -126,7 +131,7 @@ $(document).ready(function() {
 			removeTitle();
 			$("#rail").animate({
 				marginLeft: "-="+(diff*800)
-			}, "slow", function() {
+			}, speed, function() {
 				while (cpt < diff) {
 					$("#rail img:last-child").after(first);
 					first = $("img:first");
@@ -147,7 +152,7 @@ $(document).ready(function() {
 			}
 			$("#rail").animate({
 				marginLeft: "+="+(diff*800)
-			}, "slow", function() {
+			}, speed, function() {
 				displayTitle();
 				canClick = true;
 			});
@@ -155,9 +160,26 @@ $(document).ready(function() {
 	}
 
 	/* Switch entre Play / Pause (pour animation auto) : */
+	function play() {
+		if(canPlay == true){
+			play = setInterval(showNext, duration);
+			canPlay = false;
+			$("#pauseOrPlay").removeClass("fa-play");
+			$("#pauseOrPlay").addClass("fa-pause");
+		}else{
+			clearInterval(play);
+			canPlay = true;
+			watchHover = false;
+			$("#pauseOrPlay").removeClass("fa-pause");
+			$("#pauseOrPlay").addClass("fa-play");
+		}
+	}
+
+	play();
+
 	$("#play").click(function(){
 		if(canPlay == true){
-			play = setInterval(showNext, 2000);
+			play = setInterval(showNext, duration);
 			canPlay = false;
 			$("#pauseOrPlay").removeClass("fa-play");
 			$("#pauseOrPlay").addClass("fa-pause");
@@ -183,13 +205,13 @@ $(document).ready(function() {
 	});
 
 	/* Met en pause l'animation auto au survol de la souris : */
-	$("#slideshow, .info, .navigator").hover(function() {	// Mouse enters
+	$("#slideshow, .info, .navigator").hover(function() {	// Souris entre
 		if (!canPlay && watchHover) {
 			clearInterval(play);
 		}
-	}, function() {						// Mouse leaves
+	}, function() {											// Souris sort
 		if (!canPlay && watchHover) {
-			play = setInterval(showNext, 2000);
+			play = setInterval(showNext, duration);
 		} else if (!canPlay && !watchHover) {
 			watchHover = true;
 		}
@@ -201,7 +223,5 @@ $(document).ready(function() {
 		canClick = false;
 		goTo(bullet.attr('data-nbnav'));
 	});
-
-	$('.debug').html(window.screen.width + " " + window.screen.height);
 
 });
